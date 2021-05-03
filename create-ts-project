@@ -1,0 +1,34 @@
+#! /bin/sh
+usage () {
+    echo "Usage: 
+create-ts-project projectName (-o)"
+}
+if (( $# < 1 )); then
+    usage
+    exit 1
+fi
+if (( $# > 2 )); then
+    usage
+    exit 1
+fi
+if ([ -d $1 ]); then
+    if [ "$2" = "-o" ]; then
+        echo "Folder exists. Continuing."
+    else
+        echo "Folder exists. Aborting."
+        echo "To override this behaviour, set -o flag"
+        exit 1
+    fi
+fi
+mkdir $1
+cd $1
+npm init
+npm install -D typescript eslint
+npx tsc --init
+npx eslint --init
+# "start": "tsc && node dist/index.js",
+cat package.json | jq '.scripts.start = "tsc && node dist/index.js"' > package_.json
+rm -f package.json
+mv package_.json package.json
+mkdir src
+touch src/index.ts
