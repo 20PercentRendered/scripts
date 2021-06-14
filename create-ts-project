@@ -32,3 +32,4 @@ rm -f package.json
 mv package_.json package.json
 mkdir src
 touch src/index.ts
+echo Remember to set output dir to ./dist
