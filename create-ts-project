@@ -28,10 +28,7 @@ npx tsc --init
 npx eslint --init
 # "start": "tsc && node dist/index.js",
 cat package.json | jq '.scripts.start = "tsc && node dist/index.js"' > package_.json
-cat tsconfig.json | jq '.compilerOptions.outDir = "./dist/"' > tsconfig_.json
 rm -f package.json
-rm -f tsconfig.json
 mv package_.json package.json
-mv tsconfig_.json tsconfig.json
 mkdir src
 touch src/index.ts
